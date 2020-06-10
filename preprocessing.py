@@ -12,8 +12,6 @@ def draw_centralTedency(dataframe):
     fig = plt.figure()
     gs = gridspec.GridSpec(8, 8)
     ax = plt.gca()
-
-
     mean = dataframe.mean().values[0]
     median = dataframe.median().values[0]
     mode = dataframe.mode().values[0]
@@ -24,15 +22,21 @@ def draw_centralTedency(dataframe):
     plt.legend({'Mean': mean, 'Median': median, 'Mode': mode})
     plt.show()
 
-    #print(np.median(dataframe))
-    #print(dataframe.mean().values)
-    #sns.distplot(dataframe, kde=True, rug=True);
-    #plt.axvline(np.median(dataframe), color='b', linestyle='--')
-    #plt.axvline(dataframe.mean().values[0], color='g', linestyle='--')
 
-    #plt.axvline(np.mean(dataframe), color='b', linestyle='--')
-    #plt.axvline(dataframe.mode(), color='b', linestyle='--')
-    plt.show()
+def plot_features_with_date(dataset, columns):
+
+    pos = np.arange(len(dataset['date']))
+
+    for column in columns:
+        if column == 'USD ISE':
+            continue
+        _, ax = plt.subplots()
+        dataset.plot(kind='bar', x=dataset.columns.get_loc("date"), y=dataset.columns.get_loc(column), color='blue', ax=ax)
+        dataset.plot(kind='bar', x=dataset.columns.get_loc("date"), y=dataset.columns.get_loc('USD ISE'), color='red', ax=ax)
+        ticks = plt.xticks(pos[::15], rotation=90)
+        plt.rcParams["figure.figsize"] = (15, 8)
+        plt.show()
+
 
 def timeseries_to_supervised(df, n_in, n_out):
    agg = pd.DataFrame()
@@ -55,10 +59,11 @@ def preprocess(dataset, n_in, n_out):
 
 
     #plot the data to get insights
-    #print(data['date'])
-    #print(dataset.mean())
+
     columns = ['TL ISE', 'USD ISE', 'SP', 'DAX', 'FTSE', 'NIKEEI', 'BOVESPA', 'EU', 'EM']
     years = DataFrame()
+    plot_features_with_date(dataset, columns)
+
     for index, row in pd.concat([dataset['date'],dataset['USD ISE']], axis=1).iterrows():
         years.loc[index, row['date'].month] = row['USD ISE']
 
@@ -82,7 +87,7 @@ def preprocess(dataset, n_in, n_out):
     del dataset['date']
     for column in columns:
         draw_centralTedency(dataset[column].to_frame())
-    #print(dataset)
+    print(dataset)
     scaler = MinMaxScaler(feature_range=(-1, 1))
     dataframe = scaler.fit_transform(np.reshape(dataset.values, (dataset.shape[0], dataset.shape[1])))
     dataframe = pd.DataFrame(data=dataframe, columns=columns)

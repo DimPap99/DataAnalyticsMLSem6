@@ -49,6 +49,7 @@ features.columns = ['date', 'TL ISE', 'USD ISE', 'SP', 'DAX', 'FTSE', 'NIKEEI', 
 del features['date']
 del features['TL ISE']
 del features['USD ISE']
+
 n_in = 3
 n_out = 1
 superv_features = timeseries_to_supervised(features, n_in, n_out)
