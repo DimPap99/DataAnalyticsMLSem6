@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="07754d8a-3b61-4d82-a7a7-9d90dcaf4196" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/RNNpartb.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RNNpartb.py" beforeDir="false" afterPath="$PROJECT_DIR$/RNNpartb.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/preprocessing.py" beforeDir="false" afterPath="$PROJECT_DIR$/preprocessing.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -33,7 +31,7 @@
         <entry file="file://$PROJECT_DIR$/preprocessing.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="150">
-              <caret line="93" column="10" selection-start-line="93" selection-start-column="4" selection-end-line="93" selection-end-column="10" />
+              <caret line="57" column="4" selection-start-line="57" selection-start-column="4" selection-end-line="57" selection-end-column="4" />
               <folding>
                 <element signature="e#0#19#0" expanded="true" />
               </folding>
@@ -44,8 +42,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/RNNpartb.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="375">
-              <caret line="79" column="1" lean-forward="true" selection-start-line="79" selection-start-column="1" selection-end-line="79" selection-end-column="1" />
+            <state relative-caret-position="310">
+              <caret line="28" column="47" lean-forward="true" selection-start-line="28" selection-start-column="47" selection-end-line="28" selection-end-column="47" />
               <folding>
                 <element signature="e#0#19#0" expanded="true" />
               </folding>
@@ -56,8 +54,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/MLPpartA.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-158">
-              <caret line="68" column="42" selection-start-line="68" selection-start-column="32" selection-end-line="68" selection-end-column="42" />
+            <state relative-caret-position="251">
+              <caret line="42" column="37" selection-start-line="42" selection-start-column="29" selection-end-line="42" selection-end-column="37" />
               <folding>
                 <element signature="e#0#19#0" expanded="true" />
               </folding>
@@ -79,6 +77,8 @@
       <find>epochs</find>
       <find>plot</find>
       <find>dataframe</find>
+      <find>feature_scaler</find>
+      <find>fit</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -311,12 +311,12 @@
       <workItem from="1591732948222" duration="5730000" />
       <workItem from="1591770919617" duration="5758000" />
       <workItem from="1591784823121" duration="6801000" />
-      <workItem from="1591857595030" duration="6049000" />
+      <workItem from="1591857595030" duration="10358000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="64807000" />
+    <option name="totallyTimeSpent" value="69116000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -336,14 +336,14 @@
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50373137" side_tool="true" weight="0.32936078" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="11" sideWeight="0.49626866" visible="true" weight="0.32936078" />
-      <window_info anchor="bottom" id="Python Console" order="12" sideWeight="0.7148188" weight="0.42578548" />
+      <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.49626866" weight="0.22751896" />
+      <window_info anchor="bottom" id="Python Console" order="12" sideWeight="0.7148188" visible="true" weight="0.42578548" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="SciView" order="3" sideWeight="0.48465267" visible="true" weight="0.21268657" />
+      <window_info active="true" anchor="right" id="SciView" order="3" sideWeight="0.48490566" visible="true" weight="0.21268657" />
       <window_info anchor="right" id="Database" order="4" weight="0.32995737" />
-      <window_info anchor="right" x="0" y="0" width="434" height="856" id="Documentation" order="5" sideWeight="0.51534736" side_tool="true" visible="true" weight="0.21268657" />
+      <window_info anchor="right" x="0" y="0" width="434" height="856" id="Documentation" order="5" sideWeight="0.51509434" side_tool="true" visible="true" weight="0.21268657" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -413,8 +413,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/MLPpartA.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-158">
-          <caret line="68" column="42" selection-start-line="68" selection-start-column="32" selection-end-line="68" selection-end-column="42" />
+        <state relative-caret-position="251">
+          <caret line="42" column="37" selection-start-line="42" selection-start-column="29" selection-end-line="42" selection-end-column="37" />
           <folding>
             <element signature="e#0#19#0" expanded="true" />
           </folding>
@@ -424,7 +424,7 @@
     <entry file="file://$PROJECT_DIR$/preprocessing.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
-          <caret line="93" column="10" selection-start-line="93" selection-start-column="4" selection-end-line="93" selection-end-column="10" />
+          <caret line="57" column="4" selection-start-line="57" selection-start-column="4" selection-end-line="57" selection-end-column="4" />
           <folding>
             <element signature="e#0#19#0" expanded="true" />
           </folding>
@@ -433,8 +433,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/RNNpartb.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="79" column="1" lean-forward="true" selection-start-line="79" selection-start-column="1" selection-end-line="79" selection-end-column="1" />
+        <state relative-caret-position="310">
+          <caret line="28" column="47" lean-forward="true" selection-start-line="28" selection-start-column="47" selection-end-line="28" selection-end-column="47" />
           <folding>
             <element signature="e#0#19#0" expanded="true" />
           </folding>

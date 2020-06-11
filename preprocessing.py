@@ -91,19 +91,26 @@ def preprocess(dataset, n_in, n_out, show_plots:bool):
     if show_plots == True:
         for column in columns:
             draw_centralTedency(dataset[column].to_frame())
-    scaler = MinMaxScaler(feature_range=(-1, 1))
-    dataframe = scaler.fit_transform(np.reshape(dataset.values, (dataset.shape[0], dataset.shape[1])))
-    dataframe = pd.DataFrame(data=dataframe, columns=columns)
+    feature_scaler = MinMaxScaler(feature_range=(-1, 1))
+    index_scaler = MinMaxScaler(feature_range=(-1, 1))
+
+   # dataframe = scaler.fit_transform(np.reshape(dataset.values, (dataset.shape[0], dataset.shape[1])))
+   # dataframe = pd.DataFrame(data=dataframe, columns=columns)
     print(dataset.shape)
 
 
-    stock = dataframe['USD ISE'].to_frame()
-    features = dataframe.copy()
+    stock = dataset['USD ISE'].to_frame()
+    scaled_stock = index_scaler.fit_transform(np.reshape(stock['USD ISE'].values, (stock.shape[0], stock.shape[1])))
+    scaled_stock = pd.DataFrame(data=scaled_stock, columns=['USD ISE'])
+
+    features = dataset.copy()
+    scaled_features = feature_scaler.fit_transform(np.reshape(dataset.values, (dataset.shape[0], dataset.shape[1])))
+    scaled_features = pd.DataFrame(data=scaled_features, columns=columns)
     del features['USD ISE']
     del features['TL ISE']
 
-    superv_stock = timeseries_to_supervised(stock,n_in,n_out)
-    superv_features = timeseries_to_supervised(features,n_in,n_out)
+    superv_stock = timeseries_to_supervised(scaled_stock,n_in,n_out)
+    superv_features = timeseries_to_supervised(scaled_features,n_in,n_out)
 
     #Dataset  transformed to supervised problem of series (samples) 30 composed of
     # 1 days is of size [samples = the rows of any of our dataframe, 1 (for each day) ,gitr
@@ -111,7 +118,7 @@ def preprocess(dataset, n_in, n_out, show_plots:bool):
     samples = superv_stock.shape[0]
     features = superv_features.shape[1]
     steps = 1
-    return superv_stock, superv_features, [samples, steps, features], scaler
+    return superv_stock, superv_features, [samples, steps, features], index_scaler, feature_scaler
 
 
 
