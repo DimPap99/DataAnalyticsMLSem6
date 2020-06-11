@@ -55,42 +55,48 @@ def timeseries_to_supervised(df, n_in, n_out):
    agg.dropna(inplace=True)
    return agg
 
-def preprocess(dataset, n_in, n_out):
+def preprocess(dataset, n_in, n_out, show_plots:bool):
 
 
     #plot the data to get insights
-
+    dataset.reset_index(inplace=True, drop=True)
+    dataset = dataset.iloc[0:530]
+    #print(dataset['USD ISE'])
     columns = ['TL ISE', 'USD ISE', 'SP', 'DAX', 'FTSE', 'NIKEEI', 'BOVESPA', 'EU', 'EM']
-    years = DataFrame()
-    plot_features_with_date(dataset, columns)
+    if show_plots == True:
+        years = DataFrame()
+        plot_features_with_date(dataset, columns)
 
-    for index, row in pd.concat([dataset['date'],dataset['USD ISE']], axis=1).iterrows():
-        years.loc[index, row['date'].month] = row['USD ISE']
+        for index, row in pd.concat([dataset['date'],dataset['USD ISE']], axis=1).iterrows():
+            years.loc[index, row['date'].month] = row['USD ISE']
 
-    years.boxplot()
-    plt.show()
+        years.boxplot()
+        plt.show()
 
 
-    plt.plot(dataset['USD ISE'])
-    dataset.hist()
-    plt.show()
-    ax = plt.gca()
-    dataset.plot(kind='line', x=0, y=3, color='blue', ax=ax)
-    dataset.plot(kind='scatter', x=0, y=3, color='red', ax=ax)
-    plt.show()
+        plt.plot(dataset['USD ISE'])
+        dataset.hist()
+        plt.show()
+        ax = plt.gca()
+        dataset.plot(kind='line', x=0, y=3, color='blue', ax=ax)
+        dataset.plot(kind='scatter', x=0, y=3, color='red', ax=ax)
+        plt.show()
 
-    lag_plot(dataset['USD ISE'])
-    plt.show()
-    autocorrelation_plot(dataset['USD ISE'])
-    plt.show()
+        lag_plot(dataset['USD ISE'])
+        plt.show()
+        autocorrelation_plot(dataset['USD ISE'])
+        plt.show()
 
     del dataset['date']
-    for column in columns:
-        draw_centralTedency(dataset[column].to_frame())
-    print(dataset)
+    if show_plots == True:
+        for column in columns:
+            draw_centralTedency(dataset[column].to_frame())
     scaler = MinMaxScaler(feature_range=(-1, 1))
     dataframe = scaler.fit_transform(np.reshape(dataset.values, (dataset.shape[0], dataset.shape[1])))
     dataframe = pd.DataFrame(data=dataframe, columns=columns)
+    print(dataset.shape)
+
+
     stock = dataframe['USD ISE'].to_frame()
     features = dataframe.copy()
     del features['USD ISE']
@@ -100,12 +106,12 @@ def preprocess(dataset, n_in, n_out):
     superv_features = timeseries_to_supervised(features,n_in,n_out)
 
     #Dataset  transformed to supervised problem of series (samples) 30 composed of
-    # 1 days is of size [samples = the rows of any of our dataframe, 1 (for each day) ,
+    # 1 days is of size [samples = the rows of any of our dataframe, 1 (for each day) ,gitr
     # features = the columns of the features dataframe]:
     samples = superv_stock.shape[0]
-    features = features.shape[1]
+    features = superv_features.shape[1]
     steps = 1
-    return superv_stock, superv_features, [samples, steps, features]
+    return superv_stock, superv_features, [samples, steps, features], scaler
 
 
 
@@ -115,8 +121,7 @@ def preprocess(dataset, n_in, n_out):
 file_name = 'data_akbilgic.xlsx'
 data = pd.read_excel(file_name, header=None, skiprows=2)
 data.dropna(inplace=True)
-data = data.iloc[0:530]
 data.columns = ['date', 'TL ISE', 'USD ISE', 'SP', 'DAX', 'FTSE', 'NIKEEI', 'BOVESPA', 'EU', 'EM']
-preprocess(data, 1, 1)
+preprocess(data, 1, 1, False)
 
 
